@@ -114,24 +114,26 @@ final class VersionsCheck
         $output[] = '';
 
         foreach ($this->outdatedPackages as $outdatedPackage) {
-            $output[] = sprintf(
-                '  - <info>%s</info> (<comment>%s</comment>) latest is <comment>%s</comment>',
-                $outdatedPackage->getActual()->getPrettyName(),
-                $outdatedPackage->getActual()->getPrettyVersion(),
-                $outdatedPackage->getLast()->getPrettyVersion()
-            );
+            if ($outdatedPackage->getLast()->getPrettyVersion() !== 'dev-master') {
+                $output[] = sprintf(
+                    '  - <info>%s</info> (<comment>%s</comment>) latest is <comment>%s</comment>',
+                    $outdatedPackage->getActual()->getPrettyName(),
+                    $outdatedPackage->getActual()->getPrettyVersion(),
+                    $outdatedPackage->getLast()->getPrettyVersion()
+                );
 
-            if (true === $showLinks) {
-                foreach ($outdatedPackage->getLinks() as $depend) {
-                    $output[] = sprintf(
-                        '    Required by <info>%s</info> (<comment>%s</comment>)',
-                        $depend->getSource(),
-                        $depend->getPrettyConstraint()
-                    );
+                if (true === $showLinks) {
+                    foreach ($outdatedPackage->getLinks() as $depend) {
+                        $output[] = sprintf(
+                            '    Required by <info>%s</info> (<comment>%s</comment>)',
+                            $depend->getSource(),
+                            $depend->getPrettyConstraint()
+                        );
+                    }
                 }
-            }
 
-            $output[] = '';
+                $output[] = '';
+            }
         }
     }
 }
