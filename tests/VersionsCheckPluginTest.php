@@ -94,12 +94,14 @@ class VersionsCheckPluginTest extends \PHPUnit_Framework_TestCase
             'No option' => array(
                 null,
                 array(
+                    'root-packages-only' => false,
                     'show-links' => false,
                 ),
             ),
             'Empty array options' => array(
                 array(),
                 array(
+                    'root-packages-only' => false,
                     'show-links' => false,
                 ),
             ),
@@ -110,6 +112,7 @@ class VersionsCheckPluginTest extends \PHPUnit_Framework_TestCase
                     ),
                 ),
                 array(
+                    'root-packages-only' => false,
                     'show-links' => false,
                 ),
             ),
@@ -120,6 +123,7 @@ class VersionsCheckPluginTest extends \PHPUnit_Framework_TestCase
                     ),
                 ),
                 array(
+                    'root-packages-only' => false,
                     'show-links' => false,
                 ),
             ),
@@ -130,6 +134,33 @@ class VersionsCheckPluginTest extends \PHPUnit_Framework_TestCase
                     ),
                 ),
                 array(
+                    'root-packages-only' => false,
+                    'show-links' => false,
+                ),
+            ),
+            'Activate root-packages-only' => array(
+                array(
+                    'config' => array(
+                        'sllh-composer-versions-check' => array(
+                            'root-packages-only' => true,
+                        ),
+                    ),
+                ),
+                array(
+                    'root-packages-only' => true,
+                    'show-links' => false,
+                ),
+            ),
+            'Disable root-packages-only' => array(
+                array(
+                    'config' => array(
+                        'sllh-composer-versions-check' => array(
+                            'root-packages-only' => false,
+                        ),
+                    ),
+                ),
+                array(
+                    'root-packages-only' => false,
                     'show-links' => false,
                 ),
             ),
@@ -142,6 +173,7 @@ class VersionsCheckPluginTest extends \PHPUnit_Framework_TestCase
                     ),
                 ),
                 array(
+                    'root-packages-only' => false,
                     'show-links' => true,
                 ),
             ),
@@ -154,6 +186,7 @@ class VersionsCheckPluginTest extends \PHPUnit_Framework_TestCase
                     ),
                 ),
                 array(
+                    'root-packages-only' => false,
                     'show-links' => false,
                 ),
             ),

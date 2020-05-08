@@ -52,10 +52,12 @@ You can configure the plugin via the [`COMPOSER_HOME/config.json`](https://getco
 {
     "config": {
         "sllh-composer-versions-check": {
+            "root-packages-only": false,
             "show-links": false
         }
     }
 }
 ```
 
+* `ignore-sub-dependencies`: Shows only outdated root packages.
 * `show-links`: Shows outdated package links. Set to `true` to get a larger output, like the demo.

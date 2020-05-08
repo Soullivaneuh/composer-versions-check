@@ -111,6 +111,7 @@ final class VersionsCheckPlugin implements PluginInterface, EventSubscriberInter
         ;
 
         $options = array(
+            'root-packages-only' => false,
             'show-links' => false,
         );
 
@@ -118,6 +119,7 @@ final class VersionsCheckPlugin implements PluginInterface, EventSubscriberInter
             return $options;
         }
 
+        $options['root-packages-only'] = isset($pluginConfig['root-packages-only']) ? (bool) $pluginConfig['root-packages-only'] : $options['root-packages-only'];
         $options['show-links'] = isset($pluginConfig['show-links']) ? (bool) $pluginConfig['show-links'] : $options['show-links'];
 
         return $options;
@@ -129,7 +131,8 @@ final class VersionsCheckPlugin implements PluginInterface, EventSubscriberInter
             $this->versionsCheck->checkPackages(
                 $repository,
                 $repositoryManager->getLocalRepository(),
-                $rootPackage
+                $rootPackage,
+                $this->options['root-packages-only']
             );
         }
 

@@ -22,12 +22,19 @@ final class VersionsCheck
      */
     private $outdatedPackages = array();
 
-    public function checkPackages(ArrayRepository $distRepository, WritableRepositoryInterface $localRepository, RootPackageInterface $rootPackage)
+    public function checkPackages(ArrayRepository $distRepository, WritableRepositoryInterface $localRepository, RootPackageInterface $rootPackage, $rootPackagesOnly)
     {
         $packages = $localRepository->getPackages();
+        $rootRequires = array_keys($rootPackage->getRequires() + $rootPackage->getDevRequires());
+
         foreach ($packages as $package) {
             // Do not compare aliases. Aliased packages are also provided.
             if ($package instanceof AliasPackage) {
+                continue;
+            }
+
+            // No root package are ignored and it is one. Skip.
+            if ($rootPackagesOnly && !\in_array($package->getName(), $rootRequires, true)) {
                 continue;
             }
 
